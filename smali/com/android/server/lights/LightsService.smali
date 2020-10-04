@@ -6,7 +6,8 @@
 # annotations
 .annotation system Ldalvik/annotation/MemberClasses;
     value = {
-        Lcom/android/server/lights/LightsService$LightImpl;
+        Lcom/android/server/lights/LightsService$LightImpl;,
+		Lcom/android/server/lights/LightsService$OnBacklightChange;
     }
 .end annotation
 
@@ -17,6 +18,8 @@
 .field private static final FEATURE_EXTREME_ENABLE:Z
 
 .field static final TAG:Ljava/lang/String; = "LightsService"
+
+.field public static backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
 
 .field private static mOIMCService:Lcom/oneplus/core/oimc/OIMCServiceManager;
 
@@ -179,7 +182,7 @@
 
 .method private getVrDisplayMode()I
     .locals 4
-
+	
     .line 388
     invoke-static {}, Landroid/app/ActivityManager;->getCurrentUser()I
 

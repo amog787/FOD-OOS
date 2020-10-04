@@ -900,6 +900,20 @@
 
     .line 154
     :cond_2
+	#*********************
+	iget v1, p0, Lcom/android/server/lights/LightsService$LightImpl;->mId:I
+
+    if-nez v1, :cond_5
+	sget-object v1, Lcom/android/server/lights/LightsService;->backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+
+    if-eqz v1, :cond_5
+
+    sget-object v1, Lcom/android/server/lights/LightsService;->backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+	#p1=v0
+    invoke-interface {v1, p1}, Lcom/android/server/lights/LightsService$OnBacklightChange;->onBacklightChange(I)V
+	#*********************
+	:cond_5
+	
     const/4 v0, 0x1
 
     new-array v0, v0, [I
