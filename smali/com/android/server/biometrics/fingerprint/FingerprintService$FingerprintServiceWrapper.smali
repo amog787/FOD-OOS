@@ -359,8 +359,16 @@
     invoke-static {v0, v1}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$800(Lcom/android/server/biometrics/fingerprint/FingerprintService;Ljava/lang/String;)V
 
     .line 240
-    iget-object v0, v14, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintServiceWrapper;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+	iget-object v0, v14, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintServiceWrapper;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
 
+	invoke-static {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$7801(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/android/server/biometrics/fingerprint/FacolaView;->show()V
+	
+    iget-object v0, v14, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintServiceWrapper;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+	
     invoke-static {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$900(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Z
 
     move-result v15

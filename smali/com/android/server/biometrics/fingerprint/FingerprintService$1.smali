@@ -171,6 +171,20 @@
     invoke-static {v0, p1, p2, p3, p4}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$6801(Lcom/android/server/biometrics/fingerprint/FingerprintService;JII)V
 
     .line 694
+	const/4 v0, 0x5
+
+    if-ne p3, v0, :cond_1
+
+    iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$1;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+
+#*****************************  void onError(
+    invoke-static {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$7801(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/android/server/biometrics/fingerprint/FacolaView;->hide()V
+	
+	:cond_1
     const/4 v0, 0x1
 
     if-ne p3, v0, :cond_0
