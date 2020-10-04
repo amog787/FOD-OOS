@@ -900,6 +900,19 @@
 
     .line 154
     :cond_2
+    iget v1, p0, Lcom/android/server/lights/LightsService$LightImpl;->mId:I
+
+    if-nez v1, :cond_3
+
+    sget-object v1, Lcom/android/server/lights/LightsService;->backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+
+    if-eqz v1, :cond_3
+
+    sget-object v1, Lcom/android/server/lights/LightsService;->backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+
+    invoke-interface {v1, p1}, Lcom/android/server/lights/LightsService$OnBacklightChange;->onBacklightChange(I)V
+
+    :cond_3
     const/4 v0, 0x1
 
     new-array v0, v0, [I
@@ -914,11 +927,11 @@
 
     move-result v0
 
-    if-eqz v0, :cond_3
+    if-eqz v0, :cond_4
 
     iget v0, p0, Lcom/android/server/lights/LightsService$LightImpl;->mId:I
 
-    if-nez v0, :cond_3
+    if-nez v0, :cond_4
 
     .line 156
     move v1, p1
@@ -942,7 +955,7 @@
     goto :goto_0
 
     .line 159
-    :cond_3
+    :cond_4
     and-int/lit16 v0, p1, 0xff
 
     .line 160
@@ -983,7 +996,7 @@
 
     move-result-object v0
 
-    if-eqz v0, :cond_4
+    if-eqz v0, :cond_5
 
     .line 168
     iget-object v0, p0, Lcom/android/server/lights/LightsService$LightImpl;->this$0:Lcom/android/server/lights/LightsService;
@@ -995,7 +1008,7 @@
     invoke-interface {v0, p1}, Lcom/oneplus/display/IOneplusColorDisplayManager;->adjustLightColorGamut(I)V
 
     .line 171
-    :cond_4
+    :cond_5
     monitor-exit p0
 
     .line 172

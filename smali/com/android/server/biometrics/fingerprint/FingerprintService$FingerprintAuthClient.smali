@@ -128,6 +128,71 @@
     return v0
 .end method
 
+.method public onAcquired(II)Z
+    .locals 2
+    .param p1, "acquiredInfo"    # I
+    .param p2, "vendorCode"    # I
+
+    .line 178
+    invoke-super {p0, p1, p2}, Lcom/android/server/biometrics/BiometricServiceBase$AuthenticationClientImpl;->onAcquired(II)Z
+
+    move-result v0
+
+    .line 179
+    .local v0, "result":Z
+    if-eqz v0, :cond_0
+
+    iget-object v1, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintAuthClient;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+
+    invoke-static {v1}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$7801(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/android/server/biometrics/fingerprint/FacolaView;->hide()V
+
+    .line 180
+    :cond_0
+    return v0
+.end method
+
+.method public onAuthenticated(Landroid/hardware/biometrics/BiometricAuthenticator$Identifier;ZLjava/util/ArrayList;)Z
+    .locals 2
+    .param p1, "identifier"    # Landroid/hardware/biometrics/BiometricAuthenticator$Identifier;
+    .param p2, "authenticated"    # Z
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Landroid/hardware/biometrics/BiometricAuthenticator$Identifier;",
+            "Z",
+            "Ljava/util/ArrayList<",
+            "Ljava/lang/Byte;",
+            ">;)Z"
+        }
+    .end annotation
+
+    .line 186
+    .local p3, "token":Ljava/util/ArrayList;, "Ljava/util/ArrayList<Ljava/lang/Byte;>;"
+    invoke-super {p0, p1, p2, p3}, Lcom/android/server/biometrics/BiometricServiceBase$AuthenticationClientImpl;->onAuthenticated(Landroid/hardware/biometrics/BiometricAuthenticator$Identifier;ZLjava/util/ArrayList;)Z
+
+    move-result v0
+
+    .line 187
+    .local v0, "result":Z
+    if-eqz v0, :cond_0
+
+    iget-object v1, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintAuthClient;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+
+    invoke-static {v1}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$7801(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/android/server/biometrics/fingerprint/FacolaView;->hide()V
+
+    .line 188
+    :cond_0
+    return v0
+.end method
+
 .method public onStart()V
     .locals 2
 
@@ -208,6 +273,26 @@
     return v0
 .end method
 
+.method public start()I
+    .locals 1
+
+    .line 194
+    iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintAuthClient;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+
+    invoke-static {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$7801(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/android/server/biometrics/fingerprint/FacolaView;->show()V
+
+    .line 195
+    invoke-super {p0}, Lcom/android/server/biometrics/BiometricServiceBase$AuthenticationClientImpl;->start()I
+
+    move-result v0
+
+    return v0
+.end method
+
 .method protected statsModality()I
     .locals 1
 
@@ -215,6 +300,27 @@
     iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintAuthClient;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
 
     invoke-virtual {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->statsModality()I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public stop(Z)I
+    .locals 1
+    .param p1, "initiatedByClient"    # Z
+
+    .line 200
+    iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintAuthClient;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+
+    invoke-static {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$7801(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/android/server/biometrics/fingerprint/FacolaView;->hide()V
+
+    .line 201
+    invoke-super {p0, p1}, Lcom/android/server/biometrics/BiometricServiceBase$AuthenticationClientImpl;->stop(Z)I
 
     move-result v0
 

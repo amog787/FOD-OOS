@@ -164,6 +164,14 @@
 
     .line 794
     :cond_0
+    iget-object v1, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$2;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+
+    invoke-static {v1}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$7801(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Lcom/android/server/biometrics/fingerprint/FacolaView;->show()V
+
     invoke-interface {v0, p1, p2, p3}, Landroid/hardware/biometrics/fingerprint/V2_1/IBiometricsFingerprint;->enroll([BII)I
 
     move-result v1
