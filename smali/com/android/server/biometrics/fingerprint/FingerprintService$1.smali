@@ -171,9 +171,9 @@
     invoke-static {v0, p1, p2, p3, p4}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$6801(Lcom/android/server/biometrics/fingerprint/FingerprintService;JII)V
 
     .line 694
-	const/4 v0, 0x5
+    const/4 v0, 0x5
 
-    if-ne p3, v0, :cond_1
+    if-ne p3, v0, :cond_0
 
     iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$1;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
 
@@ -184,10 +184,10 @@
 
     invoke-virtual {v0}, Lcom/android/server/biometrics/fingerprint/FacolaView;->hide()V
 	
-	:cond_1
+    :cond_0
     const/4 v0, 0x1
 
-    if-ne p3, v0, :cond_0
+    if-ne p3, v0, :cond_1
 
     .line 696
     const-string v0, "FingerprintService"
@@ -236,7 +236,7 @@
     throw v0
 
     .line 703
-    :cond_0
+    :cond_1
     :goto_0
     return-void
 .end method
