@@ -8,7 +8,10 @@
     value = {
         Lcom/android/server/lights/LightsService$VintfHalCache;,
         Lcom/android/server/lights/LightsService$LightImpl;,
-        Lcom/android/server/lights/LightsService$LightsManagerBinderService;
+        Lcom/android/server/lights/LightsService$LightsManagerBinderService;,
+        #////////////////////////// amog787 changes
+        Lcom/android/server/lights/LightsService$OnBacklightChange;
+        #//////////////////////////
     }
 .end annotation
 
@@ -22,6 +25,9 @@
 
 .field static final TAG:Ljava/lang/String; = "LightsService"
 
+#////////////////////////// amog787 changes
+.field public static backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+#////////////////////////// amog787 changes
 
 # instance fields
 .field private mDaemon:Lvendor/oneplus/hardware/display/V1_0/IOneplusDisplay;

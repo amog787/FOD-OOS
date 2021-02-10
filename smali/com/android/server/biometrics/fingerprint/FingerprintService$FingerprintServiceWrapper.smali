@@ -373,6 +373,16 @@
     .line 256
     iget-object v0, v15, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintServiceWrapper;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
 
+    #////////////////////////// amog787 changes @ enroll(Landroid/os/IBinder;[BILandroid/hardware/fingerprint/IFingerprintServiceReceiver;ILjava/lang/String;)V
+	invoke-static {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$8000(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/android/server/biometrics/fingerprint/FacolaView;->show()V
+
+    iget-object v0, v15, Lcom/android/server/biometrics/fingerprint/FingerprintService$FingerprintServiceWrapper;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+    #////////////////////////// amog787
+    
     invoke-static {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$1000(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Z
 
     move-result v16

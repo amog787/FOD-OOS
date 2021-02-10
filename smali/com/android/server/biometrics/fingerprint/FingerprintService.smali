@@ -55,6 +55,10 @@
 
 .field mDiagnoseManager:Landroid/os/OPDiagnoseManager;
 
+#////////////////////////// amog787 changes
+.field private mFacola:Lcom/android/server/biometrics/fingerprint/FacolaView;
+#//////////////////////////
+
 .field private final mFailedAttempts:Landroid/util/SparseIntArray;
 
 .field private final mFingerprintConstants:Lcom/android/server/biometrics/fingerprint/FingerprintConstants;
@@ -161,6 +165,14 @@
 
     .line 849
     invoke-virtual {p1, v0, v2, v3, v1}, Landroid/content/Context;->registerReceiver(Landroid/content/BroadcastReceiver;Landroid/content/IntentFilter;Ljava/lang/String;Landroid/os/Handler;)Landroid/content/Intent;
+	
+    #////////////////////////// amog787 changes @ constructor <init>(Landroid/content/Context;)V
+    new-instance v0, Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    invoke-direct {v0, p1}, Lcom/android/server/biometrics/fingerprint/FacolaView;-><init>(Landroid/content/Context;)V
+
+    iput-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mFacola:Lcom/android/server/biometrics/fingerprint/FacolaView;
+    #//////////////////////////
 
     .line 854
     invoke-virtual {p0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->getContext()Landroid/content/Context;
@@ -1044,6 +1056,18 @@
 
     return v0
 .end method
+
+#////////////////////////// amog787 changes
+.method static synthetic access$8000(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+    .locals 1
+    .param p0, "x0"    # Lcom/android/server/biometrics/fingerprint/FingerprintService;
+
+    .line 93
+    iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mFacola:Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    return-object v0
+.end method
+#////////////////////////// 
 
 .method static synthetic access$900(Lcom/android/server/biometrics/fingerprint/FingerprintService;Ljava/lang/String;)V
     .locals 0
@@ -2174,6 +2198,13 @@
 
     .line 1172
     :cond_0
+    
+    #////////////////////////// amog787 changes @ startPostEnroll(Landroid/os/IBinder;)I
+    iget-object v3, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mFacola:Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    invoke-virtual {v3}, Lcom/android/server/biometrics/fingerprint/FacolaView;->hide()V
+    #//////////////////////////
+
     :try_start_0
     invoke-interface {v0}, Landroid/hardware/biometrics/fingerprint/V2_1/IBiometricsFingerprint;->postEnroll()I
 

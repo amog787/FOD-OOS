@@ -171,9 +171,27 @@
     invoke-static {v0, p1, p2, p3, p4}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$7301(Lcom/android/server/biometrics/fingerprint/FingerprintService;JII)V
 
     .line 733
-    const/4 v0, 0x1
+    #////////////////////////// amog787 changes @ lambda$onError$3$FingerprintService$1(JII)V fixed drep 
+    const/4 v0, 0x5
 
     if-ne p3, v0, :cond_0
+    
+    iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService$1;->this$0:Lcom/android/server/biometrics/fingerprint/FingerprintService;
+
+    invoke-static {v0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->access$8000(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/server/biometrics/fingerprint/FacolaView;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Lcom/android/server/biometrics/fingerprint/FacolaView;->hide()V
+    
+    :cond_0
+    #//////////////////////////
+
+    const/4 v0, 0x1
+
+    #////////////////////////// amog787 changes
+    if-ne p3, v0, :cond_1
+    #////////////////////////// amog787
 
     .line 735
     const-string v0, "FingerprintService"
@@ -222,7 +240,9 @@
     throw v0
 
     .line 742
-    :cond_0
+    #////////////////////////// amog787 changes
+    :cond_1
+    #////////////////////////// amog787
     :goto_0
     return-void
 .end method

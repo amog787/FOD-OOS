@@ -1002,6 +1002,27 @@
 
     .line 374
     :cond_7
+
+    #////////////////////////// amog787 changes @ setBrightness(FI)V
+    iget v1, p0, Lcom/android/server/lights/LightsService$LightImpl;->mId:I
+
+    if-nez v1, :cond_8
+	sget-object v1, Lcom/android/server/lights/LightsService;->backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+
+    if-eqz v1, :cond_8
+
+    sget-object v1, Lcom/android/server/lights/LightsService;->backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+	
+    float-to-int v2, p1
+
+    invoke-interface {v1, v2}, Lcom/android/server/lights/LightsService$OnBacklightChange;->onBacklightChange(I)V
+
+    # OLD
+    # invoke-interface {v1, p1}, Lcom/android/server/lights/LightsService$OnBacklightChange;->onBacklightChange(I)V
+
+    :cond_8
+    #//////////////////////////
+
     iget-object v0, p0, Lcom/android/server/lights/LightsService$LightImpl;->this$0:Lcom/android/server/lights/LightsService;
 
     .line 375
