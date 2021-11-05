@@ -65,6 +65,11 @@
 
 .field private final mTimedLockoutCleared:Landroid/util/SparseBooleanArray;
 
+.field private final mHasFod:Z
+
+.field private mIsKeyguard:Z
+
+.field private mFingerprintInscreenDaemon:Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
 
 # direct methods
 .method public constructor <init>(Landroid/content/Context;)V
@@ -177,6 +182,12 @@
 
     iput-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mDiagnoseManager:Landroid/os/OPDiagnoseManager;
 
+    # invoke-static {p1}, Lcom/android/internal/util/custom/fod/FodUtils;->hasFodSupport(Landroid/content/Context;)Z
+
+    # move-result p1
+    const/4 p1, 0x1
+
+    iput-boolean p1, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mHasFod:Z
     .line 870
     return-void
 .end method
@@ -3024,6 +3035,12 @@
     .line 973
     iput p1, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mCurrentUserId:I
 
+    invoke-virtual {p0, p2}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->isKeyguard(Ljava/lang/String;)Z
+
+    move-result p2
+
+    iput-boolean p2, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mIsKeyguard:Z
+
     .line 975
     .end local v2    # "firstSdkInt":I
     .end local v3    # "baseDir":Ljava/io/File;
@@ -3078,5 +3095,184 @@
     .end local v2    # "e":Ljava/lang/Exception;
     :cond_7
     :goto_2
+    return-void
+.end method
+
+.method private declared-synchronized getFingerprintInScreenDaemon()Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
+    .locals 4
+
+    monitor-enter p0
+
+    .line 1122
+    :try_start_0
+    iget-boolean v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mHasFod:Z
+    :try_end_0
+    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+
+    if-nez v0, :cond_0
+
+    .line 1123
+    const/4 v0, 0x0
+
+    monitor-exit p0
+
+    return-object v0
+
+    .line 1126
+    :cond_0
+    :try_start_1
+    iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mFingerprintInscreenDaemon:Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
+    :try_end_1
+    .catchall {:try_start_1 .. :try_end_1} :catchall_0
+
+    if-nez v0, :cond_2
+
+    .line 1128
+    :try_start_2
+    invoke-static {}, Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;->getService()Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
+
+    move-result-object v0
+
+    iput-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mFingerprintInscreenDaemon:Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
+
+    .line 1129
+    if-eqz v0, :cond_1
+
+    .line 1130
+    invoke-interface {v0}, Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;->asBinder()Landroid/os/IHwBinder;
+
+    move-result-object v0
+
+    new-instance v1, Lcom/android/server/biometrics/fingerprint/-$$Lambda$FingerprintService$8MytJsBBEpRfuLa8XnmJDOsZIC0;
+
+    invoke-direct {v1, p0}, Lcom/android/server/biometrics/fingerprint/-$$Lambda$FingerprintService$8MytJsBBEpRfuLa8XnmJDOsZIC0;-><init>(Lcom/android/server/biometrics/fingerprint/FingerprintService;)V
+
+    const-wide/16 v2, 0x0
+
+    invoke-interface {v0, v1, v2, v3}, Landroid/os/IHwBinder;->linkToDeath(Landroid/os/IHwBinder$DeathRecipient;J)Z
+    :try_end_2
+    .catch Ljava/util/NoSuchElementException; {:try_start_2 .. :try_end_2} :catch_0
+    .catch Landroid/os/RemoteException; {:try_start_2 .. :try_end_2} :catch_0
+    .catchall {:try_start_2 .. :try_end_2} :catchall_0
+
+    .line 1136
+    :cond_1
+    goto :goto_0
+
+    .line 1134
+    :catch_0
+    move-exception v0
+
+    .line 1135
+    :try_start_3
+    const-string v1, "FingerprintService"
+
+    const-string v2, "Failed to get IFingerprintInscreen interface"
+
+    invoke-static {v1, v2, v0}, Landroid/util/Slog;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
+
+    .line 1138
+    :cond_2
+    :goto_0
+    iget-object v0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mFingerprintInscreenDaemon:Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
+    :try_end_3
+    .catchall {:try_start_3 .. :try_end_3} :catchall_0
+
+    monitor-exit p0
+
+    return-object v0
+
+    .line 1121
+    :catchall_0
+    move-exception v0
+
+    monitor-exit p0
+
+    throw v0
+.end method
+
+.method static synthetic access$9400(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Z
+    .locals 0
+
+    .line 103
+    iget-boolean p0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mHasFod:Z
+
+    return p0
+.end method
+
+.method static synthetic access$9500(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/internal/statusbar/IStatusBarService;
+    .locals 0
+
+    .line 103
+    iget-object p0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mStatusBarService:Lcom/android/internal/statusbar/IStatusBarService;
+
+    return-object p0
+.end method
+
+.method static synthetic access$9800(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/internal/statusbar/IStatusBarService;
+    .locals 0
+
+    .line 103
+    iget-object p0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mStatusBarService:Lcom/android/internal/statusbar/IStatusBarService;
+
+    return-object p0
+.end method
+
+.method static synthetic access$9900(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Z
+    .locals 0
+
+    .line 103
+    iget-boolean p0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mIsKeyguard:Z
+
+    return p0
+.end method
+
+.method static synthetic access$8700(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
+    .locals 0
+
+    .line 103
+    invoke-direct {p0}, Lcom/android/server/biometrics/fingerprint/FingerprintService;->getFingerprintInScreenDaemon()Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method static synthetic access$10200(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/internal/statusbar/IStatusBarService;
+    .locals 0
+
+    .line 103
+    iget-object p0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mStatusBarService:Lcom/android/internal/statusbar/IStatusBarService;
+
+    return-object p0
+.end method
+
+.method static synthetic access$10100(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/internal/statusbar/IStatusBarService;
+    .locals 0
+
+    .line 103
+    iget-object p0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mStatusBarService:Lcom/android/internal/statusbar/IStatusBarService;
+
+    return-object p0
+.end method
+
+.method static synthetic access$10000(Lcom/android/server/biometrics/fingerprint/FingerprintService;)Lcom/android/internal/statusbar/IStatusBarService;
+    .locals 0
+
+    .line 103
+    iget-object p0, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mStatusBarService:Lcom/android/internal/statusbar/IStatusBarService;
+
+    return-object p0
+.end method
+
+.method public synthetic lambda$getFingerprintInScreenDaemon$0$FingerprintService(J)V
+    .locals 0
+
+    .line 1131
+    const/4 p1, 0x0
+
+    iput-object p1, p0, Lcom/android/server/biometrics/fingerprint/FingerprintService;->mFingerprintInscreenDaemon:Lvendor/lineage/biometrics/fingerprint/inscreen/V1_0/IFingerprintInscreen;
+
+    .line 1132
     return-void
 .end method
