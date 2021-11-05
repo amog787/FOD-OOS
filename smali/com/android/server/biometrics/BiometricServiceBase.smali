@@ -814,7 +814,7 @@
     return v0
 .end method
 
-.method private isKeyguard(Ljava/lang/String;)Z
+.method protected isKeyguard(Ljava/lang/String;)Z
     .locals 1
     .param p1, "clientPackage"    # Ljava/lang/String;
 
