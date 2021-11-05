@@ -4785,3 +4785,61 @@
     :goto_0
     return-void
 .end method
+
+.method public showInDisplayFingerprintView()V
+    .locals 1
+
+    .line 752
+    iget-object v0, p0, Lcom/android/server/statusbar/StatusBarManagerService;->mBar:Lcom/android/internal/statusbar/IStatusBar;
+
+    if-eqz v0, :cond_0
+
+    .line 754
+    :try_start_0
+    iget-object v0, p0, Lcom/android/server/statusbar/StatusBarManagerService;->mBar:Lcom/android/internal/statusbar/IStatusBar;
+
+    invoke-interface {v0}, Lcom/android/internal/statusbar/IStatusBar;->showInDisplayFingerprintView()V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 757
+    goto :goto_0
+
+    .line 755
+    :catch_0
+    move-exception v0
+
+    .line 759
+    :cond_0
+    :goto_0
+    return-void
+.end method
+
+.method public hideInDisplayFingerprintView()V
+    .locals 1
+
+    .line 763
+    iget-object v0, p0, Lcom/android/server/statusbar/StatusBarManagerService;->mBar:Lcom/android/internal/statusbar/IStatusBar;
+
+    if-eqz v0, :cond_0
+
+    .line 765
+    :try_start_0
+    iget-object v0, p0, Lcom/android/server/statusbar/StatusBarManagerService;->mBar:Lcom/android/internal/statusbar/IStatusBar;
+
+    invoke-interface {v0}, Lcom/android/internal/statusbar/IStatusBar;->hideInDisplayFingerprintView()V
+    :try_end_0
+    .catch Landroid/os/RemoteException; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 768
+    goto :goto_0
+
+    .line 766
+    :catch_0
+    move-exception v0
+
+    .line 770
+    :cond_0
+    :goto_0
+    return-void
+.end method
