@@ -1,0 +1,25 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: services.jar
+compressionType: false
+doNotCompress:
+- classes.dex
+- META-INF/MANIFEST.MF
+isFrameworkApk: false
+packageInfo: null
+sdkInfo:
+  minSdkVersion: '28'
+sharedLibrary: false
+sparseResources: false
+unknownFiles:
+  com/android/server/am/OomAdjuster_compat_config.xml: '8'
+  com/android/server/am/ProcessList_compat_config.xml: '8'
+  com/android/server/compat/CompatChange_compat_config.xml: '8'
+  com/android/server/devicepolicy/DevicePolicyManagerService_compat_config.xml: '8'
+  com/android/server/notification/NotificationManagerService_compat_config.xml: '8'
+  com/android/server/pm/PackageManagerService_compat_config.xml: '8'
+  com/android/server/pm/SELinuxMMAC_compat_config.xml: '8'
+  com/android/server/pm/parsing/library/AndroidTestBaseUpdater_compat_config.xml: '8'
+  com/android/server/pm/permission/PermissionManagerService_compat_config.xml: '8'
+usesFramework: null
+version: 2.6.0
+versionInfo: null
